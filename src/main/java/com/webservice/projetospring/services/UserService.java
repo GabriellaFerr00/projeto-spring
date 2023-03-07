@@ -1,6 +1,6 @@
 package com.webservice.projetospring.services;
 
-import com.webservice.projetospring.entities.User;
+import com.webservice.projetospring.domain.entities.User;
 import com.webservice.projetospring.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.webservice.projetospring.controllers;
 
-import com.webservice.projetospring.entities.Order;
+import com.webservice.projetospring.domain.entities.Order;
 import com.webservice.projetospring.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

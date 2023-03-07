@@ -1,4 +1,4 @@
-package com.webservice.projetospring.entities;
+package com.webservice.projetospring.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

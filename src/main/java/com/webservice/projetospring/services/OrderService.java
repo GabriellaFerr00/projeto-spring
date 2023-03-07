@@ -1,6 +1,6 @@
 package com.webservice.projetospring.services;
 
-import com.webservice.projetospring.entities.Order;
+import com.webservice.projetospring.domain.entities.Order;
 import com.webservice.projetospring.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
