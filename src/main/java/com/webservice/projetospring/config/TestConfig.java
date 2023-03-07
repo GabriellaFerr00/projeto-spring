@@ -25,6 +25,8 @@ public class TestConfig implements CommandLineRunner {
     private ProductRepository productRepository;
     @Autowired
     private OrderItemRepository orderItemRepository;
+    @Autowired
+    private PaymentRepository paymentRepository;
 
 
     @Override
@@ -66,6 +68,15 @@ public class TestConfig implements CommandLineRunner {
         OrderItem oi4 = new OrderItem( 2, product5.getPrice(), order3, product5);
 
         orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+
+        Payment payment1 = new Payment(null,Instant.parse("2023-03-22T17:21:22Z"), order3);
+        //obs: para salvar um objeto dependente numa relacao um para um nao se chama o respository do proprio objeto
+        //se faz uma associacao em mao dupla em memoria
+        //associa o pedido ao pagamento
+        //ai manda salvar novamente o PEDIDO e o jpa se encarrega de salvar esse pagamento do pedido
+        order3.setPayment(payment1);
+
+        orderRepository.save(order3);
 
     }
 }

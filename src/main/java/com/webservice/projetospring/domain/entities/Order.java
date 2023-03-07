@@ -1,7 +1,6 @@
 package com.webservice.projetospring.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.webservice.projetospring.domain.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -37,6 +36,10 @@ public class Order {
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();
 
+    //no caso do mapeadmento de um para um, estamos mapeando as entidades para terem o mesmo id
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
+
     public Set<OrderItem> getItems(){
         return items;
     }
@@ -56,6 +59,14 @@ public class Order {
         if(orderStatus != null) {
             this.orderStatus = orderStatus.getValue();
         }
+    }
+
+    public Double getTotal(){
+        double sum = 0.0;
+        for(OrderItem item : items){
+            sum += item.getSubTotal();
+        }
+        return sum;
     }
 
     @Override
