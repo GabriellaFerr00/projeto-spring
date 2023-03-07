@@ -1,8 +1,10 @@
 package com.webservice.projetospring.config;
 
+import com.webservice.projetospring.domain.entities.Category;
 import com.webservice.projetospring.domain.entities.Order;
 import com.webservice.projetospring.domain.entities.User;
 import com.webservice.projetospring.domain.enums.OrderStatus;
+import com.webservice.projetospring.repositories.CategoryRepository;
 import com.webservice.projetospring.repositories.OrderRepository;
 import com.webservice.projetospring.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class TestConfig implements CommandLineRunner {
     private UserRepository userRepository;
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -31,7 +36,12 @@ public class TestConfig implements CommandLineRunner {
         Order order2 = new Order(null, Instant.parse("2023-03-21T03:42:10Z"), user2, OrderStatus.DELIVERED);
         Order order3 = new Order(null, Instant.parse("2023-03-22T15:21:22Z"), user1, OrderStatus.PAID);
 
+        Category category1 = new Category(null, "Electronics");
+        Category category2 = new Category(null, "Books");
+        Category category3 = new Category(null, "Computers");
+
         userRepository.saveAll(Arrays.asList(user1, user2));
         orderRepository.saveAll(Arrays.asList(order1, order2, order3));
+        categoryRepository.saveAll(Arrays.asList(category1, category2, category3));
     }
 }

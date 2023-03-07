@@ -1,7 +1,8 @@
 package com.webservice.projetospring.controllers;
 
+import com.webservice.projetospring.domain.entities.Category;
 import com.webservice.projetospring.domain.entities.Order;
-import com.webservice.projetospring.services.OrderService;
+import com.webservice.projetospring.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,24 +13,24 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController //recurso web implementado por um controlador rest
-@RequestMapping(value = "/orders")
-public class OrderController {
+@RequestMapping(value = "/categories")
+public class CategoryController {
 
     @Autowired
-    private OrderService orderService;
+    private CategoryService categoryService;
 
     @GetMapping
-    public ResponseEntity<List<Order>> findAll(){
-        List<Order> listOrder = orderService.findAll();
+    public ResponseEntity<List<Category>> findAll(){
+        List<Category> listCategory= categoryService.findAll();
 
-        return ResponseEntity.ok().body(listOrder);
+        return ResponseEntity.ok().body(listCategory);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Order> findById(@PathVariable Long id){
-        Order order = orderService.findById(id);
+    public ResponseEntity<Category> findById(@PathVariable Long id){
+        Category category = categoryService.findById(id);
 
-        return ResponseEntity.ok().body(order);
+        return ResponseEntity.ok().body(category);
     }
 
 
