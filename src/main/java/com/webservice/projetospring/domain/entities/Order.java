@@ -1,6 +1,7 @@
 package com.webservice.projetospring.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.webservice.projetospring.domain.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,7 +10,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -30,6 +33,13 @@ public class Order {
     private User client;
 
     private Integer orderStatus;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
+
+    public Set<OrderItem> getItems(){
+        return items;
+    }
 
     public Order(Long id, Instant moment, User client, OrderStatus orderStatus) {
         this.id = id;
