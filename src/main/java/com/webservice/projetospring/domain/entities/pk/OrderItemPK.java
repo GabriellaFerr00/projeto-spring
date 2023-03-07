@@ -23,6 +23,10 @@ public class OrderItemPK {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    public Product getProduct() {
+        return product;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -1,6 +1,7 @@
 package com.webservice.projetospring.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.webservice.projetospring.domain.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

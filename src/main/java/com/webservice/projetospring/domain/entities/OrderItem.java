@@ -34,6 +34,7 @@ public class OrderItem {
     }
 
     //getOrder chama o pedido associado a este item de pedido ai o item por sua vez chama o pedidos e se torna um loop
+    //aquiiiiii
     @JsonIgnore
     public Order getOrder(){
         return id.getOrder();
