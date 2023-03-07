@@ -1,5 +1,6 @@
 package com.webservice.projetospring.domain.entities.pk; //pacote para colocar as classes auxiliares para ser uma chave primaria composta
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.webservice.projetospring.domain.entities.Order;
 import com.webservice.projetospring.domain.entities.Product;
 import jakarta.persistence.Embeddable;
@@ -16,6 +17,7 @@ import java.util.Objects;
 public class OrderItemPK {
     @ManyToOne
     @JoinColumn(name = "order_id")
+
     private Order order;
     @ManyToOne
     @JoinColumn(name = "product_id")

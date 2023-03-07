@@ -1,5 +1,6 @@
 package com.webservice.projetospring.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.webservice.projetospring.domain.entities.pk.OrderItemPK;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -21,8 +22,9 @@ public class OrderItem {
     private Integer quantity;
     private Double price;
 
+    //sempre que for uma classe auxiliar que e o id composto, tem que instanciar ela
     @EmbeddedId
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK();
 
     public OrderItem(Integer quantity, Double price, Order order, Product product) {
         this.quantity = quantity;
@@ -31,6 +33,8 @@ public class OrderItem {
         id.setProduct(product);
     }
 
+    //getOrder chama o pedido associado a este item de pedido ai o item por sua vez chama o pedidos e se torna um loop
+    @JsonIgnore
     public Order getOrder(){
         return id.getOrder();
     }

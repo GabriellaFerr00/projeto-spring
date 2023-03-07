@@ -1,14 +1,8 @@
 package com.webservice.projetospring.config;
 
-import com.webservice.projetospring.domain.entities.Category;
-import com.webservice.projetospring.domain.entities.Order;
-import com.webservice.projetospring.domain.entities.Product;
-import com.webservice.projetospring.domain.entities.User;
+import com.webservice.projetospring.domain.entities.*;
 import com.webservice.projetospring.domain.enums.OrderStatus;
-import com.webservice.projetospring.repositories.CategoryRepository;
-import com.webservice.projetospring.repositories.OrderRepository;
-import com.webservice.projetospring.repositories.ProductRepository;
-import com.webservice.projetospring.repositories.UserRepository;
+import com.webservice.projetospring.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +23,8 @@ public class TestConfig implements CommandLineRunner {
     private CategoryRepository categoryRepository;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
 
     @Override
@@ -63,6 +59,13 @@ public class TestConfig implements CommandLineRunner {
         product5.getCategories().add(category2);
 
         productRepository.saveAll(Arrays.asList(product1, product2, product3, product4, product5));
+
+        OrderItem oi1 = new OrderItem(2, product1.getPrice(), order1, product1);
+        OrderItem oi2 = new OrderItem(1, product3.getPrice(), order1, product3);
+        OrderItem oi3 = new OrderItem( 2, product3.getPrice(), order2, product3);
+        OrderItem oi4 = new OrderItem( 2, product5.getPrice(), order3, product5);
+
+        orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 
     }
 }
