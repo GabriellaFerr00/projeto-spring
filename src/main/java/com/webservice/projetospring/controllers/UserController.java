@@ -3,7 +3,6 @@ package com.webservice.projetospring.controllers;
 import com.webservice.projetospring.domain.entities.User;
 import com.webservice.projetospring.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -48,6 +47,13 @@ public class UserController {
         userService.delete(id);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User userUpdate){
+        userUpdate = userService.update(id, userUpdate);
+
+        return ResponseEntity.ok().body(userUpdate);
     }
 
 }
