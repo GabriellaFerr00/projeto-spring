@@ -1,6 +1,6 @@
 package com.webservice.projetospring.repositories;
 
-import com.webservice.projetospring.entities.User;
+import com.webservice.projetospring.domain.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
