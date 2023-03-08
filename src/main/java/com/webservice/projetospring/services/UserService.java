@@ -1,8 +1,13 @@
 package com.webservice.projetospring.services;
 
 import com.webservice.projetospring.domain.entities.User;
+import com.webservice.projetospring.exception.DatabaseException;
+import com.webservice.projetospring.exception.ResourceNotFoundException;
 import com.webservice.projetospring.repositories.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,21 +25,31 @@ public class UserService {
 
     public User findById(Long id){
         Optional<User> user = userRepository.findById(id);
-        return user.get();
+        return user.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public User insert(User user){
         return userRepository.save(user);
     }
-    @Transactional
-    public void delete(Long id){
-        userRepository.deleteById(id);
+
+    public void delete(Long id) {
+        try {
+            userRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException ex) {
+            throw new ResourceNotFoundException(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
+        }
     }
 
     public User update(Long id, User user){
-        User entity = userRepository.getReferenceById(id);
-        updateEntity(entity, user);
-        return userRepository.save(entity);
+        try {
+            User entity = userRepository.getReferenceById(id);
+            updateEntity(entity, user);
+            return userRepository.save(entity);
+        } catch (EntityNotFoundException e){
+            throw new ResourceNotFoundException(id);
+        }
     }
 
     public void updateEntity(User entity, User user){
